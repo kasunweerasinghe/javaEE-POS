@@ -7,9 +7,7 @@
 
 package servlet;
 
-import javax.json.Json;
-import javax.json.JsonArrayBuilder;
-import javax.json.JsonObjectBuilder;
+import javax.json.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -102,6 +100,41 @@ public class CustomerServlet extends HttpServlet {
             }
             resp.getWriter().print(jObject.build());
         } catch (SQLException e) {
+            JsonObjectBuilder jsonObject = Json.createObjectBuilder();
+            jsonObject.add("state","error");
+            jsonObject.add("message",e.getMessage());
+            resp.getWriter().print(jsonObject.build());
+            resp.setStatus(400);
+        }
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        JsonReader reader = Json.createReader(req.getReader());
+        JsonObject customer = reader.readObject();
+        String id = customer.getString("id");
+        String name = customer.getString("name");
+        String address = customer.getString("address");
+        String salary = customer.getString("salary");
+        try(Connection connection = ( (BasicDataSource) getServletContext().getAttribute("dbcp")).getConnection()) {
+            PreparedStatement pstm3 = connection.prepareStatement("update Customer set name=?,address=?,salary=? where id=?");
+            pstm3.setObject(4, id);
+            pstm3.setObject(1, name);
+            pstm3.setObject(2, address);
+            pstm3.setObject(3, salary);
+            boolean execute3 = pstm3.executeUpdate() > 0;
+            JsonObjectBuilder responseObject = Json.createObjectBuilder();
+
+            if (execute3) {
+                responseObject.add("state","done");
+                responseObject.add("message","Successfully Updated..!");
+            }else{
+                responseObject.add("state","Error");
+                responseObject.add("message","No Customer For the Given ID..!");
+            }
+            resp.getWriter().print(responseObject.build());
+        } catch (SQLException e) {
+
             JsonObjectBuilder jsonObject = Json.createObjectBuilder();
             jsonObject.add("state","error");
             jsonObject.add("message",e.getMessage());
