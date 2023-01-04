@@ -118,7 +118,7 @@
                 <button class="btn btn-outline-primary" id="btnSaveCustomer" type="button">Save Customer</button>
                 <button class="btn btn-outline-info" id="btnClearCustomer" type="button">Clear</button>
                 <button class="btn btn-outline-success" id="btnGetAll" type="button">Get All</button>
-                <button class="btn btn-outline-warning" id="btnUpdateCustomer" type="button">Update</button>
+                <button class="btn btn-outline-warning" id="btnUpdate" type="button">Update</button>
                 <button class="btn btn-outline-danger" id="btnCusDelete" type="button">Delete</button>
             </section>
 
@@ -212,6 +212,60 @@
             }
         });
     });
+
+
+    //Update customer details
+    $("#btnUpdate").click(function () {
+
+        let customerID = $("#txtCustomerID").val();
+        let customerName = $("#txtCustomerName").val();
+        let customerAddress = $("#txtCustomerAddress").val();
+        let customerSalary = $("#txtCustomerSalary").val();
+
+        var customer = {
+            id: customerID,
+            name: customerName,
+            address: customerAddress,
+            salary: customerSalary
+        }
+
+        $.ajax({
+            url: baseURL+'customer',
+            method: 'put',
+            contentType:"application/json",
+            data:JSON.stringify(customer),
+            dataType:"json",
+            success: function (res) {
+                alert(res.message);
+                loadAllCustomers();
+            },
+            error:function (error){
+                let cause= JSON.parse(error.responseText).message;
+                alert(cause);
+            }
+
+        });
+    });
+
+    //Load all customers
+    function loadAllCustomers() {
+        $("#tblCustomer").empty();
+        $.ajax({
+            url: baseURL+"customer",
+            dataType: "json",
+            success: function (resp) {
+                console.log(resp);
+                for (let cus of resp.data) {
+                    var row = '<tr><td>' + cus.id + '</td><td>' + cus.name + '</td><td>' + cus.address + '</td><td>' + cus.salary + '</td></tr>';
+                    $("#tblCustomer").append(row);
+                }
+                bindRowClickEvents();
+                setTextFieldValues("","","","");
+                $("#txtCustomerID").focus();
+            }
+        });
+
+    }
 
 </script>
 </body>
