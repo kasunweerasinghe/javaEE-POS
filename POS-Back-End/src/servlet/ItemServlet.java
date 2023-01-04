@@ -20,7 +20,6 @@ public class ItemServlet extends HttpServlet {
             PreparedStatement psmt = connection.prepareStatement("select * from Item");
             ResultSet rst = psmt.executeQuery();
             JsonArrayBuilder array = Json.createArrayBuilder();
-            resp.addHeader("Access-Control-Allow-Origin","*");
 
             while (rst.next()) {
                 JsonObjectBuilder object = Json.createObjectBuilder();
@@ -62,7 +61,7 @@ public class ItemServlet extends HttpServlet {
         String name = req.getParameter("description");
         String qtyOnHand = req.getParameter("qtyOnHand");
         String unitPrice = req.getParameter("unitPrice");
-        resp.addHeader("Access-Control-Allow-Origin","*");
+
         resp.setContentType("application/json");//MIME Types
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -99,7 +98,7 @@ public class ItemServlet extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("code");
-        resp.addHeader("Access-Control-Allow-Origin","*");
+
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -132,11 +131,10 @@ public class ItemServlet extends HttpServlet {
             resp.setStatus(400);
         }
     }
+
     @Override
     protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.addHeader("Access-Control-Allow-Origin","*");
-        resp.addHeader("Access-Control-Allow-Methods","DELETE,PUT");
-        resp.addHeader("Access-Control-Allow-Headers","Content-Type");
+
     }
 
     @Override
@@ -147,7 +145,7 @@ public class ItemServlet extends HttpServlet {
         String name = item.getString("description");
         String qtyOnHand = item.getString("qtyOnHand");
         String unitPrice = item.getString("unitPrice");
-        resp.addHeader("Access-Control-Allow-Origin","*");
+
         resp.setContentType("application/json");//MIME Types
         try {
             Class.forName("com.mysql.jdbc.Driver");
