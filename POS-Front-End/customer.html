@@ -167,6 +167,35 @@
 
     let baseURL="http://localhost:8080/posbackend/";
 
+    //Add customer to the database
+    $("#btnCustomer").click(function () {
+
+        var formData = $("#customerForm").serialize();
+        // will generate a query String including form data
+
+        //send ajax request to the customer servlet
+        $.ajax({
+            url: baseURL+"customer",
+            method: "post",
+            data: formData,
+            dataType:"json",
+            success: function (res) {
+                alert(res.message);
+                loadAllCustomers();
+            },
+            error:function(error){
+                var jsObject=JSON.parse(error.responseText);
+                alert(jsObject.message);
+            }
+        });
+    });
+
+    //Get all customers from the database
+    $("#btnGetAll").click(function () {
+        //send ajax request to the customer servlet
+        loadAllCustomers();
+    });
+
 
 </script>
 </body>
