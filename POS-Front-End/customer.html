@@ -267,6 +267,32 @@
 
     }
 
+    //Event binding for table rows
+    function bindRowClickEvents() {
+        $("#tblCustomer>tr").click(function () {
+            let id = $(this).children(":eq(0)").text();
+            let name = $(this).children(":eq(1)").text();
+            let address = $(this).children(":eq(2)").text();
+            let salary = $(this).children(":eq(3)").text();
+            // console.log(id, name, address, salary);
+
+            //setting table details values to text fields
+            $('#txtCustomerID').val(id);
+            $('#txtCustomerName').val(name);
+            $('#txtCustomerAddress').val(address);
+            $('#txtCustomerSalary').val(salary);
+
+        });
+    }
+
+    //set values for text fields
+    function setTextFieldValues(id, name, address, salary) {
+        $("#txtCustomerID").val(id);
+        $("#txtCustomerName").val(name);
+        $("#txtCustomerAddress").val(address);
+        $("#txtCustomerSalary").val(salary);
+    }
+
 </script>
 </body>
 </html>
