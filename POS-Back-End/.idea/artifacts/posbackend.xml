@@ -1,6 +1,18 @@
 <component name="ArtifactManager">
   <artifact type="war" name="posbackend">
     <output-path>$PROJECT_DIR$/out/artifacts/posbackend</output-path>
-    <root id="archive" name="posbackend.war" />
+    <root id="archive" name="posbackend.war">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="POS-Back-End" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="commons-dbcp2-2.9.0" />
+          <element id="library" level="project" name="javax.json-api-1.1.4" />
+          <element id="library" level="project" name="mysql-connector-j-8.0.31" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="POS-Back-End/web/Web" />
+    </root>
   </artifact>
 </component>
