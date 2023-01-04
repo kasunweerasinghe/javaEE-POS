@@ -1,0 +1,109 @@
+<!--
+* created by kasun weerasinghe
+* Date: 2023-01-04
+* Time: 10:02
+* Project Name: POS-Back-End
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Order-Details</title>
+  <meta content="width=device-width initial-scale=1" name="viewport">
+  <link href="assets/Styles/Stylesheet.css" rel="stylesheet">
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+  <script crossorigin="anonymous" src="https://kit.fontawesome.com/f7d94b6141.js"></script> <!-- for icon -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body>
+<main>
+
+  <!--  start header -->
+  <header class="mb-3" id="header">
+    <!--start nav bar with image and name-->
+    <nav class="navbar navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <img alt="Logo" class="d-inline-block align-text-top" height="30" src="assets/images/store.png"
+               width="30">
+          Foodie Vibes POS System
+        </a>
+
+        <!--start nav bar with navigations links(home,customer,item...)-->
+        <nav class="navbar navbar-expand-lg bg-light">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#"></a>
+            <button aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation"
+                    class="navbar-toggler" data-bs-target="#navbarNavAltMarkup"
+                    data-bs-toggle="collapse" type="button">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div class="navbar-nav">
+                <a aria-current="page" class="nav-link active" href="index.html" id="home">Home</a>
+                <a class="nav-link" href="customer.html" id="customer" onclick="generateCustomerID()">Customer</a>
+                <a class="nav-link" href="item.html" id="item" onclick="generateItemID()">Item</a>
+                <a class="nav-link" href="order.html" id="order" onclick="generateOrderID()">Order</a>
+                <a class="nav-link" href="#" id="orderDetails" onclick="loadOrderDetailsTable()">Order-Details</a>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <!--end nav bar with navigations links(home,customer,item...)-->
+
+      </div>
+    </nav>
+    <!--end nav bar with image and name-->
+
+  </header>
+  <!--  end header -->
+  <!----------------------------------------------------------------------------------------------------------------->
+
+
+
+  <section id="orderDetailsSection">
+    <!--order details Headline-->
+    <div class="mb-5">
+      <h1 class="container-fluid"><span class="headline_part1">Order</span> <span
+              class="headline_part2">Details</span></h1>
+    </div>
+
+    <!-- Search Bar -->
+    <section class="row mb-3 container-fluid">
+      <form class="d-flex col-5" role="search">
+        <input aria-label="Search" class="form-control me-2 " id="orderdetailsmyInput" placeholder="orderID"
+               type="search">
+      </form>
+
+    </section>
+
+    <!--  order details Table -->
+    <section class="row container-fluid">
+      <div class="container-fluid col-12">
+        <table class="table table-hover table-bordered table-striped" id="orderDetailsTable_Main">
+          <thead class="bg-success text-white">
+          <tr class="">
+            <th>Order ID</th>
+            <th>Date</th>
+            <th>Customer Id</th>
+            <th>Customer Name</th>
+            <th>Item Code</th>
+            <th>Item Name</th>
+            <th>Quantity</th>
+            <th>Discount</th>
+            <th>Total</th>
+          </tr>
+          </thead>
+          <tbody class="table-light" id="orderDetailTable">
+
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </section>
+  <!----------------------------------------------------------------------------------------------------------------->
+
+</main>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!--
+* created by kasun weerasinghe
+* Date: 2023-01-04
+* Time: 09:57
+* Project Name: POS-Back-End
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer</title>
+    <meta content="width=device-width initial-scale=1" name="viewport">
+    <link href="assets/Styles/Stylesheet.css" rel="stylesheet">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <script crossorigin="anonymous" src="https://kit.fontawesome.com/f7d94b6141.js"></script> <!-- for icon -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body>
+
+<main>
+
+    <!--  start header -->
+    <header class="mb-3" id="header">
+        <!--start nav bar with image and name-->
+        <nav class="navbar navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <img alt="Logo" class="d-inline-block align-text-top" height="30" src="assets/images/store.png"
+                         width="30">
+                    Foodie Vibes POS System
+                </a>
+
+                <!--start nav bar with navigations links(home,customer,item...)-->
+                <nav class="navbar navbar-expand-lg bg-light">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="#"></a>
+                        <button aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation"
+                                class="navbar-toggler" data-bs-target="#navbarNavAltMarkup"
+                                data-bs-toggle="collapse" type="button">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                            <div class="navbar-nav">
+                                <a aria-current="page" class="nav-link active" href="index.html" id="home">Home</a>
+                                <a class="nav-link" href="#" id="customer" onclick="generateCustomerID()">Customer</a>
+                                <a class="nav-link" href="item.html" id="item" onclick="generateItemID()">Item</a>
+                                <a class="nav-link" href="order.html" id="order" onclick="generateOrderID()">Order</a>
+                                <a class="nav-link" href="orderDetails.html" id="orderDetails"
+                                   onclick="loadOrderDetailsTable()">Order-Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+                <!--end nav bar with navigations links(home,customer,item...)-->
+
+            </div>
+        </nav>
+        <!--end nav bar with image and name-->
+
+    </header>
+    <!--  end header -->
+    <!----------------------------------------------------------------------------------------------------------------->
+
+    <section id="customerSection">
+        <!--Customer Headline-->
+        <div class="mb-5">
+            <h1 class="container-fluid"><span class="headline_part1">Manage</span> <span
+                    class="headline_part2">Customer</span></h1>
+        </div>
+
+        <!-- Start Customer Here-->
+        <section class="container-fluid mt-3 col-12" id="customerContent">
+            <!--Start customer data form -->
+            <section class="container-fluid mt-5">
+                <form id="customerForm">
+                    <!-- First Row-->
+                    <div class="row">
+                        <div class="mb-3 col">
+                            <label class="form-label" for="txtCustomerID">Customer ID</label>
+                            <input class="form-control customer_form" id="txtCustomerID" placeholder="C001" type="text">
+                            <span class="control-error" id="lblcusid"></span>
+                        </div>
+
+                        <div class="mb-3 col">
+                            <label class="form-label" for="txtCustomerName">Customer Name</label>
+                            <input class="form-control customer_form" id="txtCustomerName"
+                                   placeholder="Kasun Weerasinghe"
+                                   type="text">
+                            <span class="control-error" id="lblcusname"></span>
+                        </div>
+                    </div>
+
+                    <!-- Second Row-->
+                    <div class="row">
+
+                        <div class="mb-3 col">
+                            <label class="form-label" for="txtCustomerAddress">Customer Address</label>
+                            <input class="form-control customer_form" id="txtCustomerAddress"
+                                   placeholder="Colombo" type="text">
+                            <span class="control-error" id="lblcusaddress"></span>
+                        </div>
+
+                        <div class="mb-3 col">
+                            <label class="form-label" for="txtCustomerSalary">Customer Salary</label>
+                            <input class="form-control customer_form" id="txtCustomerSalary" placeholder="90000"
+                                   type="number">
+                            <span class="control-error" id="lblcussalary"></span>
+                        </div>
+                    </div>
+                </form>
+            </section>
+            <!--End customer data form -->
+
+
+            <!-- Buttons Section -->
+            <section class="container-fluid mt-1 button mb-5 co-12">
+                <button class="btn btn-outline-primary" id="btnSaveCustomer" type="button">Save Customer</button>
+                <button class="btn btn-outline-info" id="btnClearCustomer" type="button">Clear</button>
+                <button class="btn btn-outline-warning" id="btnUpdateCustomer" type="button">Update</button>
+                <button class="btn btn-outline-danger" id="btnDeleteCustomer" type="button">Delete</button>
+            </section>
+
+            <!-- Search Bar -->
+            <section class="row mb-3">
+                <form class="d-flex col-5" role="search">
+                    <input aria-label="Search" class="form-control me-2 " id="customermyInput"
+                           placeholder="CustomerID/NIC/Name"
+                           type="search">
+                    <!--                <button class="btn btn-outline-success" type="submit">Search</button>-->
+                </form>
+            </section>
+
+
+            <!--  Customer Table -->
+            <section class="row ">
+
+                <div class="container-fluid col-12">
+                    <table class="table table-bordered table-hover">
+                        <thead class="bg-info text-white">
+                        <tr class="table-warning">
+                            <td class="col-3">Customer Id</td>
+                            <td class="col-3">Name</td>
+                            <td class="col-3">Address</td>
+                            <td class="col-3">Salary</td>
+                        </tr>
+                        </thead>
+
+                        <tbody id="tblCustomer">
+
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </section>
+        <!-- End Customer Here-->
+    </section>
+    <!----------------------------------------------------------------------------------------------------------------->
+</main>
+
+
+</body>
+</html>
