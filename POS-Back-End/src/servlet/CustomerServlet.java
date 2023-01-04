@@ -83,4 +83,31 @@ public class CustomerServlet extends HttpServlet {
         }
     }
 
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String id = req.getParameter("id");
+
+        try (Connection connection = ( (BasicDataSource) getServletContext().getAttribute("dbcp")).getConnection()){
+            PreparedStatement pstm1 = connection.prepareStatement("delete from Customer where id=?");
+            pstm1.setObject(1, id);
+            boolean execute = pstm1.executeUpdate() > 0;
+            JsonObjectBuilder jObject = Json.createObjectBuilder();
+            if (execute) {
+                jObject.add("state","done");
+                jObject.add("message","Successfully Deleted..!");
+            }else{
+                jObject.add("state","error");
+                jObject.add("message","No such Customer to Delete..!");
+                resp.setStatus(400);
+            }
+            resp.getWriter().print(jObject.build());
+        } catch (SQLException e) {
+            JsonObjectBuilder jsonObject = Json.createObjectBuilder();
+            jsonObject.add("state","error");
+            jsonObject.add("message",e.getMessage());
+            resp.getWriter().print(jsonObject.build());
+            resp.setStatus(400);
+        }
+    }
+
 }
