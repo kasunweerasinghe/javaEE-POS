@@ -119,7 +119,7 @@
                 <button class="btn btn-outline-info" id="btnClearCustomer" type="button">Clear</button>
                 <button class="btn btn-outline-success" id="btnGetAll" type="button">Get All</button>
                 <button class="btn btn-outline-warning" id="btnUpdateCustomer" type="button">Update</button>
-                <button class="btn btn-outline-danger" id="btnDeleteCustomer" type="button">Delete</button>
+                <button class="btn btn-outline-danger" id="btnCusDelete" type="button">Delete</button>
             </section>
 
             <!-- Search Bar -->
@@ -196,6 +196,22 @@
         loadAllCustomers();
     });
 
+    //Delete customer by id
+    $("#btnCusDelete").click(function () {
+        let id = $("#txtCustomerID").val();
+        $.ajax({
+            url: baseURL+"customer?id=" + id + "",
+            method: "delete",
+            dataType:"json",
+            success: function (resp) {
+                alert(resp.message);
+                loadAllCustomers();
+            },
+            error:function (error){
+                alert(JSON.parse(error.responseText).message);
+            }
+        });
+    });
 
 </script>
 </body>
