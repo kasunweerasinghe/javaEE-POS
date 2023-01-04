@@ -159,140 +159,134 @@
     <script src="assets/js/bootstrap.min.js"></script>
     <script>
 
-        let baseUrl = "http://localhost:8080/posbackend/";
-
-        //load all items from the database
-        getAllItems();
+        let baseURL="http://localhost:8080/posbackend/";
 
 
-        //Button Events
-        //Add Item
+        //Add item to the database
         $("#btnItem").click(function () {
-            let formData = $("#itemForm").serialize();
+
+            var formData = $("#itemForm").serialize();
+            // will generate a query String including form data
+
+            //send ajax request to the customer servlet
             $.ajax({
-                url: baseUrl + "item",
+                url: baseURL+"item",
                 method: "post",
                 data: formData,
-                dataType: "json",
+                dataType:"json",
                 success: function (res) {
                     alert(res.message);
-                    getAllItems();
+                    loadAllItems();
                 },
-                error: function (error) {
-                    // invokes if status code range is 500 range or 400 range
-                    console.log("Error Method Invoked");
-                    console.log(JSON.parse(error.responseText));
-                    alert(JSON.parse(error.responseText).message);
-
+                error:function(error){
+                    var jsObject=JSON.parse(error.responseText);
+                    alert(jsObject.message);
                 }
             });
-
         });
 
-        //Delete Item
+        //Get all items from the database
+        $("#btnGetAll").click(function () {
+            //send ajax request to the customer servlet
+            loadAllItems();
+        });
+
+
+        //Delete item by id
         $("#btnItemDelete").click(function () {
-            let code = $("#itemCode").val();
+            let code = $("#txtItemCode").val();
             $.ajax({
-                url: baseUrl + "item?code=" + code + "",
+                url: baseURL+"item?code=" + code + "",
                 method: "delete",
                 dataType:"json",
                 success: function (resp) {
-                    getAllItems();
                     alert(resp.message);
+                    loadAllItems();
                 },
-                error: function (error) {
-                    let message = JSON.parse(error.responseText).message;
-                    alert(message);
+                error:function (error){
+                    alert(JSON.parse(error.responseText).message);
                 }
             });
         });
 
 
-        //Update Item
+        //Update item details
         $("#btnItemUpdate").click(function () {
-            let code = $("#itemCode").val();
-            let name = $("#itemName").val();
-            let qty = $("#itemQty").val();
-            let price = $("#itemPrice").val();
 
-            var itemOb = {
-                code: code,
-                description: name,
-                qtyOnHand: qty,
-                unitPrice: price
+            let itemCode = $("#txtItemCode").val();
+            let itemDescription = $("#txtItemName").val();
+            let itemQtyOnHand = $("#txtItemQTYOnHand").val();
+            let itemPrice = $("#txtItemPrice").val();
+
+            var item = {
+                code: itemCode,
+                description: itemDescription,
+                qtyOnHand: itemQtyOnHand,
+                unitPrice: itemPrice
             }
+
             $.ajax({
-                url: baseUrl + "item",
-                method: "put",
-                contentType: "application/json",
-                data: JSON.stringify(itemOb),
-                dataType: "json",
-                success: function (resp) {
-                    getAllItems();
-                    alert(resp.message);
+                url: baseURL+'item',
+                method: 'put',
+                contentType:"application/json",
+                data:JSON.stringify(item),
+                dataType:"json",
+                success: function (res) {
+                    alert(res.message);
+                    loadAllItems();
                 },
-                error: function (error) {
-                    let message = JSON.parse(error.responseText).message;
-                    alert(message);
+                error:function (error){
+                    let cause= JSON.parse(error.responseText).message;
+                    alert(cause);
                 }
+
             });
         });
 
-        //Get All Items
-        $("#btnGetAll").click(function () {
-            getAllItems();
-        });
-
-        //Get all Items Function
-        function getAllItems() {
+        //Load all customers
+        function loadAllItems() {
             $("#tblItem").empty();
             $.ajax({
-                url: baseUrl + "item",
-                success: function (res) {
-                    for (let c of res.data) {
-                        let code = c.code;
-                        let description = c.description;
-                        let qtyOnHand = c.qtyOnHand;
-                        let unitPrice = c.unitPrice;
-
-                        let row = "<tr><td>" + code + "</td><td>" + description + "</td><td>" + qtyOnHand + "</td><td>" + unitPrice + "</td></tr>";
+                url: baseURL+"item",
+                dataType: "json",
+                success: function (resp) {
+                    console.log(resp);
+                    for (let item of resp.data) {
+                        var row = '<tr><td>' + item.code + '</td><td>' + item.description + '</td><td>' + item.qtyOnHand + '</td><td>' + item.unitPrice + '</td></tr>';
                         $("#tblItem").append(row);
                     }
                     bindRowClickEvents();
-                    setTextFieldValues("", "", "", "");
-                },
-                error: function (error) {
-                    let message = JSON.parse(error.responseText).message;
-                    alert(message);
+                    setTextFieldValues("","","","");
+                    $("#txtItemCode").focus();
                 }
             });
+
         }
 
-        //Bind events for the table rows function
+        //Event binding for table rows
         function bindRowClickEvents() {
-
             $("#tblItem>tr").click(function () {
                 let code = $(this).children(":eq(0)").text();
-                let name = $(this).children(":eq(1)").text();
-                let qty = $(this).children(":eq(2)").text();
-                let price = $(this).children(":eq(3)").text();
-
+                let description = $(this).children(":eq(1)").text();
+                let qtyOnHand = $(this).children(":eq(2)").text();
+                let unitPrice = $(this).children(":eq(3)").text();
+                // console.log(id, name, address, salary);
 
                 //setting table details values to text fields
                 $('#txtItemCode').val(code);
-                $('#txtItemName').val(name);
-                $('#txtItemQTYOnHand').val(qty);
-                $('#txtItemPrice').val(price);
+                $('#txtItemName').val(description);
+                $('#txtItemQTYOnHand').val(qtyOnHand);
+                $('#txtItemPrice').val(unitPrice);
 
             });
         }
 
-        //Set text fields values function
-        function setTextFieldValues(code, name, qty, price) {
-            $('#itemCode').val(code);
-            $('#itemName').val(name);
-            $('#itemQty').val(qty);
-            $('#itemPrice').val(price);
+        //set values for text fields
+        function setTextFieldValues(code, description, qtyOnHand, unitPrice) {
+            $("#txtItemCode").val(code);
+            $("#txtItemName").val(description);
+            $("#txtItemQTYOnHand").val(qtyOnHand);
+            $("#txtItemPrice").val(unitPrice);
         }
 
     </script>

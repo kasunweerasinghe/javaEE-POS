@@ -101,7 +101,6 @@ public class ItemServlet extends HttpServlet {
         String id = req.getParameter("code");
         resp.addHeader("Access-Control-Allow-Origin","*");
 
-
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Thogakade", "root", "Kasun2023..");
@@ -133,7 +132,6 @@ public class ItemServlet extends HttpServlet {
             resp.setStatus(400);
         }
     }
-
     @Override
     protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.addHeader("Access-Control-Allow-Origin","*");
