@@ -77,7 +77,8 @@
                     <div class="row">
                         <div class="mb-3 col">
                             <label class="form-label" for="txtItemCode">Item Code</label>
-                            <input class="form-control item_form" id="txtItemCode" placeholder="I001" type="text" name="code">
+                            <input class="form-control item_form" id="txtItemCode" placeholder="I001" type="text"
+                                   name="code">
                             <span class="control-error" id="lblitemid"></span>
                         </div>
 
@@ -101,7 +102,8 @@
 
                         <div class="mb-3 col">
                             <label class="form-label" for="txtItemPrice">Price</label>
-                            <input class="form-control item_form" id="txtItemPrice" placeholder="200" type="number" name="unitPrice">
+                            <input class="form-control item_form" id="txtItemPrice" placeholder="200" type="number"
+                                   name="unitPrice">
                             <span class="control-error" id="lblitemPrice"></span>
                         </div>
                     </div>
@@ -112,11 +114,11 @@
 
             <!-- Buttons Section -->
             <section class="container-fluid mt-1 button mb-5">
-                <button class="btn btn-outline-primary" id="btnItem">Save Item</button>
-                <button class="btn btn-outline-info" id="btn-clear">Clear</button>
-                <button class="btn btn-outline-success" id="btnGetAll">Get All</button>
-                <button class="btn btn-outline-warning" id="btnItemUpdate">Update</button>
-                <button class="btn btn-outline-danger" id="btnItemDelete">Delete</button>
+                <button class="btn btn-outline-primary" id="btnItem" type="button">Save Item</button>
+                <button class="btn btn-outline-info" id="btn-clear" type="button">Clear</button>
+                <button class="btn btn-outline-success" id="btnGetAll" type="button">Get All</button>
+                <button class="btn btn-outline-warning" id="btnItemUpdate" type="button">Update</button>
+                <button class="btn btn-outline-danger" id="btnItemDelete" type="button">Delete</button>
             </section>
 
             <!-- Search Bar -->
@@ -157,7 +159,7 @@
     <script src="assets/js/bootstrap.min.js"></script>
     <script>
 
-        let baseUrl="http://localhost:8080/posbackend/";
+        let baseUrl = "http://localhost:8080/posbackend/";
 
         //load all items from the database
         getAllItems();
@@ -168,7 +170,7 @@
         $("#btnItem").click(function () {
             let formData = $("#itemForm").serialize();
             $.ajax({
-                url: baseUrl+"item",
+                url: baseUrl + "item",
                 method: "post",
                 data: formData,
                 dataType: "json",
@@ -191,8 +193,9 @@
         $("#btnItemDelete").click(function () {
             let code = $("#itemCode").val();
             $.ajax({
-                url: baseUrl+"item?code=" + code,
+                url: baseUrl + "item?code=" + code + "",
                 method: "delete",
+                dataType:"json",
                 success: function (resp) {
                     getAllItems();
                     alert(resp.message);
@@ -203,6 +206,7 @@
                 }
             });
         });
+
 
         //Update Item
         $("#btnItemUpdate").click(function () {
@@ -218,7 +222,7 @@
                 unitPrice: price
             }
             $.ajax({
-                url: baseUrl+"item",
+                url: baseUrl + "item",
                 method: "put",
                 contentType: "application/json",
                 data: JSON.stringify(itemOb),
@@ -243,7 +247,7 @@
         function getAllItems() {
             $("#tblItem").empty();
             $.ajax({
-                url: baseUrl+"item",
+                url: baseUrl + "item",
                 success: function (res) {
                     for (let c of res.data) {
                         let code = c.code;
@@ -266,6 +270,7 @@
 
         //Bind events for the table rows function
         function bindRowClickEvents() {
+
             $("#tblItem>tr").click(function () {
                 let code = $(this).children(":eq(0)").text();
                 let name = $(this).children(":eq(1)").text();
@@ -274,10 +279,10 @@
 
 
                 //setting table details values to text fields
-                $('#itemCode').val(code);
-                $('#itemName').val(name);
-                $('#itemQty').val(qty);
-                $('#itemPrice').val(price);
+                $('#txtItemCode').val(code);
+                $('#txtItemName').val(name);
+                $('#txtItemQTYOnHand').val(qty);
+                $('#txtItemPrice').val(price);
 
             });
         }

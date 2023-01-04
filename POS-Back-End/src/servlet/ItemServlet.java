@@ -96,12 +96,11 @@ public class ItemServlet extends HttpServlet {
         }
     }
 
-
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("code");
         resp.addHeader("Access-Control-Allow-Origin","*");
-        resp.setContentType("application/json");//MIME Types
+
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -110,6 +109,7 @@ public class ItemServlet extends HttpServlet {
             pstm1.setObject(1, id);
             boolean execute = pstm1.executeUpdate() > 0;
             JsonObjectBuilder jObject = Json.createObjectBuilder();
+            resp.setContentType("application/json");//MIME Types
             if (execute) {
                 jObject.add("state","done");
                 jObject.add("message","Successfully Deleted..!");
@@ -144,11 +144,11 @@ public class ItemServlet extends HttpServlet {
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         JsonReader reader = Json.createReader(req.getReader());
-        JsonObject customer = reader.readObject();
-        String code = customer.getString("code");
-        String name = customer.getString("description");
-        String qtyOnHand = customer.getString("qtyOnHand");
-        String unitPrice = customer.getString("unitPrice");
+        JsonObject item = reader.readObject();
+        String code = item.getString("code");
+        String name = item.getString("description");
+        String qtyOnHand = item.getString("qtyOnHand");
+        String unitPrice = item.getString("unitPrice");
         resp.addHeader("Access-Control-Allow-Origin","*");
         resp.setContentType("application/json");//MIME Types
         try {
