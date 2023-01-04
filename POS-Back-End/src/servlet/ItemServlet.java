@@ -24,10 +24,10 @@ public class ItemServlet extends HttpServlet {
 
             while (rst.next()) {
                 JsonObjectBuilder object = Json.createObjectBuilder();
-                object.add("code",rst.getString("code"));
-                object.add("description",rst.getString("description"));
-                object.add("qtyOnHand",rst.getString("qtyOnHand"));
-                object.add("unitPrice",rst.getDouble("unitPrice"));
+                object.add("code",rst.getString("ItemCode"));
+                object.add("description",rst.getString("Description"));
+                object.add("qtyOnHand",rst.getString("QtyOnHand"));
+                object.add("unitPrice",rst.getDouble("UnitPrice"));
                 array.add(object.build());
             }
 
@@ -66,7 +66,7 @@ public class ItemServlet extends HttpServlet {
         resp.setContentType("application/json");//MIME Types
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/company", "root", "sanu1234");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Thogakade", "root", "Kasun2023..");
             PreparedStatement pstm2 = connection.prepareStatement("insert into Item values(?,?,?,?)");
             pstm2.setObject(1, code);
             pstm2.setObject(2, name);
@@ -105,8 +105,8 @@ public class ItemServlet extends HttpServlet {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/company", "root", "sanu1234");
-            PreparedStatement pstm1 = connection.prepareStatement("delete from Item where code=?");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Thogakade", "root", "Kasun2023..");
+            PreparedStatement pstm1 = connection.prepareStatement("delete from Item where ItemCode=?");
             pstm1.setObject(1, id);
             boolean execute = pstm1.executeUpdate() > 0;
             JsonObjectBuilder jObject = Json.createObjectBuilder();
@@ -153,8 +153,8 @@ public class ItemServlet extends HttpServlet {
         resp.setContentType("application/json");//MIME Types
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/company", "root", "sanu1234");
-            PreparedStatement pstm3 = connection.prepareStatement("update Item set description=?,qtyOnHand=?,unitPrice=? where code=?");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Thogakade", "root", "Kasun2023..");
+            PreparedStatement pstm3 = connection.prepareStatement("update Item set Description=?,QtyOnHand=?,UnitPrice=? where ItemCode=?");
             pstm3.setObject(4, code);
             pstm3.setObject(1, name);
             pstm3.setObject(2, qtyOnHand);
