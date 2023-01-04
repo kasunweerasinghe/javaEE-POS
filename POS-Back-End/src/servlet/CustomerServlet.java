@@ -54,4 +54,33 @@ public class CustomerServlet extends HttpServlet {
         }
     }
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String id = req.getParameter("id");
+        String name = req.getParameter("name");
+        String address = req.getParameter("address");
+        String salary = req.getParameter("salary");
+        try (Connection connection = ( (BasicDataSource) getServletContext().getAttribute("dbcp")).getConnection()){
+            PreparedStatement pstm2 = connection.prepareStatement("insert into Customer values(?,?,?,?)");
+            pstm2.setObject(1, id);
+            pstm2.setObject(2, name);
+            pstm2.setObject(3, address);
+            pstm2.setObject(4, salary);
+            boolean output = pstm2.executeUpdate() > 0;
+            if (output) {
+                JsonObjectBuilder jsonObject = Json.createObjectBuilder();
+                jsonObject.add("state","done");
+                jsonObject.add("message","successful");
+                resp.getWriter().print(jsonObject.build());
+            }
+
+        } catch (SQLException e) {
+            JsonObjectBuilder jsonObject = Json.createObjectBuilder();
+            jsonObject.add("state","error");
+            jsonObject.add("message",e.getMessage());
+            resp.getWriter().print(jsonObject.build());
+            resp.setStatus(400);
+        }
+    }
+
 }
