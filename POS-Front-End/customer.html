@@ -78,7 +78,7 @@
                     <div class="row">
                         <div class="mb-3 col">
                             <label class="form-label" for="txtCustomerID">Customer ID</label>
-                            <input class="form-control customer_form" id="txtCustomerID" placeholder="C001" type="text">
+                            <input class="form-control customer_form" id="txtCustomerID" placeholder="C001" type="text"  name="id">
                             <span class="control-error" id="lblcusid"></span>
                         </div>
 
@@ -86,7 +86,7 @@
                             <label class="form-label" for="txtCustomerName">Customer Name</label>
                             <input class="form-control customer_form" id="txtCustomerName"
                                    placeholder="Kasun Weerasinghe"
-                                   type="text">
+                                   type="text" name="name">
                             <span class="control-error" id="lblcusname"></span>
                         </div>
                     </div>
@@ -97,14 +97,14 @@
                         <div class="mb-3 col">
                             <label class="form-label" for="txtCustomerAddress">Customer Address</label>
                             <input class="form-control customer_form" id="txtCustomerAddress"
-                                   placeholder="Colombo" type="text">
+                                   placeholder="Colombo" type="text" name="address">
                             <span class="control-error" id="lblcusaddress"></span>
                         </div>
 
                         <div class="mb-3 col">
                             <label class="form-label" for="txtCustomerSalary">Customer Salary</label>
                             <input class="form-control customer_form" id="txtCustomerSalary" placeholder="90000"
-                                   type="number">
+                                   type="number" name="salary">
                             <span class="control-error" id="lblcussalary"></span>
                         </div>
                     </div>
@@ -117,6 +117,7 @@
             <section class="container-fluid mt-1 button mb-5 co-12">
                 <button class="btn btn-outline-primary" id="btnSaveCustomer" type="button">Save Customer</button>
                 <button class="btn btn-outline-info" id="btnClearCustomer" type="button">Clear</button>
+                <button class="btn btn-outline-success" id="btnGetAll" type="button">Get All</button>
                 <button class="btn btn-outline-warning" id="btnUpdateCustomer" type="button">Update</button>
                 <button class="btn btn-outline-danger" id="btnDeleteCustomer" type="button">Delete</button>
             </section>
@@ -159,6 +160,7 @@
     <!----------------------------------------------------------------------------------------------------------------->
 </main>
 
-
+<script src="assets/js/jquery-3.6.1.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
 </body>
 </html>
