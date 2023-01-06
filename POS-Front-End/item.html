@@ -161,7 +161,7 @@
 
         let baseURL="http://localhost:8080/posbackend/";
 
-        loadAllItems();
+        getAllItems();
 
         //Add item to the database
         $("#btnItem").click(function () {
@@ -177,7 +177,7 @@
                 dataType:"json",
                 success: function (res) {
                     alert(res.message);
-                    loadAllItems();
+                    getAllItems();
                 },
                 error:function(error){
                     var jsObject=JSON.parse(error.responseText);
@@ -189,7 +189,7 @@
         //Get all items from the database
         $("#btnGetAll").click(function () {
             //send ajax request to the customer servlet
-            loadAllItems();
+            getAllItems();
         });
 
 
@@ -202,7 +202,7 @@
                 dataType:"json",
                 success: function (resp) {
                     alert(resp.message);
-                    loadAllItems();
+                    getAllItems();
                 },
                 error:function (error){
                     alert(JSON.parse(error.responseText).message);
@@ -234,7 +234,7 @@
                 dataType:"json",
                 success: function (res) {
                     alert(res.message);
-                    loadAllItems();
+                    getAllItems();
                 },
                 error:function (error){
                     let cause= JSON.parse(error.responseText).message;
@@ -245,7 +245,7 @@
         });
 
         //Load all customers
-        function loadAllItems() {
+        function getAllItems() {
             $("#tblItem").empty();
             $.ajax({
                 url: baseURL+"item",

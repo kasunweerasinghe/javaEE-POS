@@ -304,6 +304,52 @@
   </section>
   <!----------------------------------------------------------------------------------------------------------------->
 
+
+  <script src="assets/js/jquery-3.6.1.min.js"></script>
+  <script src="assets/js/bootstrap.min.js"></script>
+  <script>
+
+
+    let baseUrl = "http://localhost:8080/posbackend/";
+
+    //load all items from the database
+    loadAllItems();
+    loadAllCustomers();
+    setDates();
+    searchCustomer();
+
+    function loadAllItems() {
+      $("#inputItemID").empty();
+      $.ajax({
+        url: baseUrl + "item",
+        success: function (res) {
+          for (let c of res.data) {
+            let code = c.code;
+            $("#inputItemID").append(`<option value="${code}">${code}</option>`);
+          }
+        },
+        error: function (error) {
+          let message = JSON.parse(error.responseText).message;
+          alert(message);
+        }
+      });
+    }
+
+    function loadAllCustomers() {
+      $("#inputCustomerID").empty();
+      $.ajax({
+        url: baseUrl + "customer",
+        dataType: "json",
+        success: function (resp) {
+          console.log(resp);
+          for (let cus of resp.data) {
+            $("#inputCustomerID").append(`<option value="${cus.id}">${cus.id}</option>`);
+          }
+        }
+      });
+    }
+
+  </script>
 </main>
 </body>
 </html>
