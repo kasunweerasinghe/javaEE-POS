@@ -8,348 +8,464 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Order</title>
-  <meta content="width=device-width initial-scale=1" name="viewport">
-  <link href="assets/Styles/Stylesheet.css" rel="stylesheet">
-  <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-  <script crossorigin="anonymous" src="https://kit.fontawesome.com/f7d94b6141.js"></script> <!-- for icon -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Order</title>
+    <meta content="width=device-width initial-scale=1" name="viewport">
+    <link href="assets/Styles/Stylesheet.css" rel="stylesheet">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <script crossorigin="anonymous" src="https://kit.fontawesome.com/f7d94b6141.js"></script> <!-- for icon -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
 
 <main>
-  <!--  start header -->
-  <header class="mb-3" id="header">
-    <!--start nav bar with image and name-->
-    <nav class="navbar navbar-dark bg-primary">
-      <div class="container">
-        <a class="navbar-brand" href="#">
-          <img alt="Logo" class="d-inline-block align-text-top" height="30" src="assets/images/store.png"
-               width="30">
-          Foodie Vibes POS System
-        </a>
+    <!--  start header -->
+    <header class="mb-3" id="header">
+        <!--start nav bar with image and name-->
+        <nav class="navbar navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <img alt="Logo" class="d-inline-block align-text-top" height="30" src="assets/images/store.png"
+                         width="30">
+                    Foodie Vibes POS System
+                </a>
 
-        <!--start nav bar with navigations links(home,customer,item...)-->
-        <nav class="navbar navbar-expand-lg bg-light">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="#"></a>
-            <button aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation"
-                    class="navbar-toggler" data-bs-target="#navbarNavAltMarkup"
-                    data-bs-toggle="collapse" type="button">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-              <div class="navbar-nav">
-                <a aria-current="page" class="nav-link active" href="index.html" id="home">Home</a>
-                <a class="nav-link" href="customer.html" id="customer" onclick="generateCustomerID()">Customer</a>
-                <a class="nav-link" href="item.html" id="item" onclick="generateItemID()">Item</a>
-                <a class="nav-link" href="#" id="order" onclick="generateOrderID()">Order</a>
-                <a class="nav-link" href="orderDetails.html" id="orderDetails" onclick="loadOrderDetailsTable()">Order-Details</a>
-              </div>
+                <!--start nav bar with navigations links(home,customer,item...)-->
+                <nav class="navbar navbar-expand-lg bg-light">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="#"></a>
+                        <button aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation"
+                                class="navbar-toggler" data-bs-target="#navbarNavAltMarkup"
+                                data-bs-toggle="collapse" type="button">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                            <div class="navbar-nav">
+                                <a aria-current="page" class="nav-link active" href="index.html" id="home">Home</a>
+                                <a class="nav-link" href="customer.html" id="customer" onclick="generateCustomerID()">Customer</a>
+                                <a class="nav-link" href="item.html" id="item" onclick="generateItemID()">Item</a>
+                                <a class="nav-link" href="#" id="order" onclick="generateOrderID()">Order</a>
+                                <a class="nav-link" href="orderDetails.html" id="orderDetails"
+                                   onclick="loadOrderDetailsTable()">Order-Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+                <!--end nav bar with navigations links(home,customer,item...)-->
+
             </div>
-          </div>
         </nav>
-        <!--end nav bar with navigations links(home,customer,item...)-->
+        <!--end nav bar with image and name-->
 
-      </div>
-    </nav>
-    <!--end nav bar with image and name-->
-
-  </header>
-  <!--  end header -->
-  <!----------------------------------------------------------------------------------------------------------------->
+    </header>
+    <!--  end header -->
+    <!----------------------------------------------------------------------------------------------------------------->
 
 
-  <section id="orderSection">
-    <!--Order Headline-->
-    <div class="mb-5">
-      <h1 class="container-fluid"><span class="headline_part1">Place</span> <span
-              class="headline_part2">Order</span></h1>
-    </div>
-
-    <!--Start Invoice details, select item and total forms row-->
-    <section class="container-fluid row mb-5">
-
-      <!-- Start Invoice Details Form Section-->
-      <section class="mb-3 col-12 col-md-6 col-lg-4">
-
-        <!-- start form border -->
-        <div class="card" style="border-radius: 15px;">
-          <div class="card-body p-5">
-            <h3 class="text-uppercase text-center mb-5">Invoice Details</h3>
-
-            <!-- start Invoice form here -->
-            <form id="Invoice Details">
-
-              <!--Start 1st row -->
-              <div class="row g-3 mb-4">
-                <!--Start Order ID -->
-                <div class="col">
-                  Order ID:
-                  <input aria-label="Order ID" class="form-control" id="txtOrderID" placeholder=""
-                         type="text">
-                </div>
-                <!--End Order ID -->
-
-                <!--Start Date -->
-                <div class="col">
-                  Date:
-                  <input aria-label="Date" class="form-control" id="txtDate" placeholder=""
-                         type="date">
-                </div>
-                <!--End Date -->
-              </div>
-              <!--End 1st row -->
-
-
-              <!--Start 2nd row -->
-              <div class="row g-3 mb-4">
-                <!--Start choose customer id here -->
-                <div class="col">
-                  Customer ID:
-                  <select class="form-select" id="inputCustomerID">
-                  </select>
-                </div>
-                <!--End choose customer id here -->
-
-                <!--Start Customer name -->
-                <div class="col">
-                  Customer Name:
-                  <input aria-label="Customer Name" class="form-control" id="txtCusName"
-                         placeholder=""
-                         type="text">
-                </div>
-                <!--End Customer name -->
-              </div>
-              <!--End 2nd row -->
-
-              <!--Start 3rd row -->
-              <div class="row g-3">
-                <!--Start Customer Address -->
-                <div class="col">
-                  Customer Address:
-                  <input aria-label="Customer Address" class="form-control" id="txtCusAddress"
-                         placeholder=""
-                         type="text">
-                </div>
-                <!--End Customer Address -->
-
-                <!--Start Customer Salary -->
-                <div class="col">
-                  Customer Salary:
-                  <input aria-label="Customer Salary" class="form-control" id="txtCusSalary"
-                         placeholder=""
-                         type="number">
-                </div>
-                <!--ENd Customer Salary -->
-              </div>
-              <!--End 3rd row -->
-            </form>
-            <!-- end Invoice form here -->
-          </div>
-        </div>
-        <!-- end form border -->
-
-      </section>
-      <!-- End Invoice Details Form Section-->
-
-
-      <!-- Start Item Select Form Section-->
-      <section class="mb-3 col-12 col-md-6 col-lg-4">
-
-        <div class="card" style="border-radius: 15px;">
-          <div class="card-body p-5">
-            <h3 class="text-uppercase text-center mb-5">Select Item</h3>
-
-            <!-- Start Item Select Form-->
-            <form>
-
-              <!-- Start 1st Row-->
-              <div class="row g-3 mb-4">
-                <!-- Start Item Code-->
-                <div class="col">
-                  Item ID:
-                  <select class="form-select" id="inputItemID">
-                  </select>
-                </div>
-                <!-- End Item Code-->
-
-                <!-- Start Item Name-->
-                <div class="col">
-                  Item Name:
-                  <input aria-label="Item Name" class="form-control" id="itemName" placeholder=""
-                         type="text">
-                </div>
-                <!-- End Item Name-->
-              </div>
-              <!-- End 1st Row-->
-
-              <!-- Start 2nd Row-->
-              <div class="row g-3 mb-4">
-                <!-- Start Item QTYOnHand-->
-                <div class="col">
-                  onHand:
-                  <input aria-label="QTYOnHand" class="form-control" id="itemonHand" placeholder=""
-                         type="number">
-                </div>
-                <!-- End Item QTYOnHand-->
-
-                <!-- Start Item Price-->
-                <div class="col">
-                  Price:
-                  <input aria-label="Price" class="form-control" id="itemPrice" placeholder=""
-                         type="number">
-                </div>
-                <!-- End Item Price-->
-
-                <!-- Start Order QTY-->
-                <div class="col">
-                  OrderQTY:
-                  <input aria-label="Order QTY" class="form-control" id="itemorderQty" placeholder=""
-                         type="number">
-                </div>
-              </div>
-              <!-- End 2nd Row-->
-
-              <!--Start Add to Cart Button and Clear button-->
-              <div>
-                <button class="btn btn-outline-primary" id="btnAddToCart" type="button">Add to Cart
-                </button>
-
-                <button class="btn btn-outline-warning" id="btnClear" type="button">Clear</button>
-              </div>
-              <!--End Add to Cart Button-->
-            </form>
-            <!-- End Item Select Form-->
-          </div>
-        </div>
-      </section>
-      <!-- End Item Select Form Section-->
-
-
-      <!-- Start Total calculate Form-->
-      <section class="mb-3 col-12 col-md-6 col-lg-4">
-        <nav class="navbar bg-light mb-4">
-          <div class="container-fluid">
-            <span class="navbar-brand mb-0  ">Total:</span>
-          </div>
-          <div class="container-fluid">
-            <span id="total">00.0</span>
-          </div>
-        </nav>
-
-
-        <nav class="navbar bg-light mb-4">
-          <div class="container-fluid">
-            <span class="navbar-brand mb-0  ">Sub Total:</span>
-          </div>
-          <div class="container-fluid">
-            <span id="subTotal">00.0</span>
-          </div>
-        </nav>
-
-
-        <!-- Start cash and discount Row-->
-        <div class="row g-3 mb-4">
-          <!-- Start Item Code-->
-          <div class="col">
-            <input aria-label="Cash" class="form-control" id="txtCash" placeholder="Cash" type="text">
-          </div>
-          <!-- End Item Code-->
-
-          <!-- Start Item Name-->
-          <div class="col">
-            <input aria-label="Discount" class="form-control" id="txtDiscount" placeholder="Discount"
-                   type="number">
-          </div>
-          <!-- End Item Name-->
-        </div>
-        <!-- End cash and discount Row-->
-
-        <div class="col">
-          <input aria-label="Balance" class="form-control mb-3" id="txtBalance" placeholder="Balance"
-                 type="number">
+    <section id="orderSection">
+        <!--Order Headline-->
+        <div class="mb-5">
+            <h1 class="container-fluid"><span class="headline_part1">Place</span> <span
+                    class="headline_part2">Order</span></h1>
         </div>
 
-        <button class="btn btn-outline-success" id="btnPlaceOrderButton" type="button">Place Order</button>
+        <!--Start Invoice details, select item and total forms row-->
+        <section class="container-fluid row mb-5">
 
-      </section>
-      <!-- End Total calculate Form-->
+            <!-- Start Invoice Details Form Section-->
+            <section class="mb-3 col-12 col-md-6 col-lg-4">
 
+                <!-- start form border -->
+                <div class="card" style="border-radius: 15px;">
+                    <div class="card-body p-5">
+                        <h3 class="text-uppercase text-center mb-5">Invoice Details</h3>
+
+                        <!-- start Invoice form here -->
+                        <form id="Invoice Details">
+
+                            <!--Start 1st row -->
+                            <div class="row g-3 mb-4">
+                                <!--Start Order ID -->
+                                <div class="col">
+                                    Order ID:
+                                    <input aria-label="Order ID" class="form-control" id="txtOrderID" placeholder=""
+                                           type="text" >
+                                </div>
+                                <!--End Order ID -->
+
+                                <!--Start Date -->
+                                <div class="col">
+                                    Date:
+                                    <input aria-label="Date" class="form-control" id="txtDate" placeholder=""
+                                           type="date">
+                                </div>
+                                <!--End Date -->
+                            </div>
+                            <!--End 1st row -->
+
+
+                            <!--Start 2nd row -->
+                            <div class="row g-3 mb-4">
+                                <!--Start choose customer id here -->
+                                <div class="col">
+                                    Customer ID:
+                                    <select class="form-select" id="inputCustomerID">
+                                    </select>
+                                </div>
+                                <!--End choose customer id here -->
+
+                                <!--Start Customer name -->
+                                <div class="col">
+                                    Customer Name:
+                                    <input aria-label="Customer Name" class="form-control" id="txtCusName"
+                                           placeholder=""
+                                           type="text" readonly>
+                                </div>
+                                <!--End Customer name -->
+                            </div>
+                            <!--End 2nd row -->
+
+                            <!--Start 3rd row -->
+                            <div class="row g-3">
+                                <!--Start Customer Address -->
+                                <div class="col">
+                                    Customer Address:
+                                    <input aria-label="Customer Address" class="form-control" id="txtCusAddress"
+                                           placeholder=""
+                                           type="text" readonly>
+                                </div>
+                                <!--End Customer Address -->
+
+                                <!--Start Customer Salary -->
+                                <div class="col">
+                                    Customer Salary:
+                                    <input aria-label="Customer Salary" class="form-control" id="txtCusSalary"
+                                           placeholder=""
+                                           type="number" readonly>
+                                </div>
+                                <!--ENd Customer Salary -->
+                            </div>
+                            <!--End 3rd row -->
+                        </form>
+                        <!-- end Invoice form here -->
+                    </div>
+                </div>
+                <!-- end form border -->
+
+            </section>
+            <!-- End Invoice Details Form Section-->
+
+
+            <!-- Start Item Select Form Section-->
+            <section class="mb-3 col-12 col-md-6 col-lg-4">
+
+                <div class="card" style="border-radius: 15px;">
+                    <div class="card-body p-5">
+                        <h3 class="text-uppercase text-center mb-5">Select Item</h3>
+
+                        <!-- Start Item Select Form-->
+                        <form>
+
+                            <!-- Start 1st Row-->
+                            <div class="row g-3 mb-4">
+                                <!-- Start Item Code-->
+                                <div class="col">
+                                    Item ID:
+                                    <select class="form-select" id="inputItemID">
+                                    </select>
+                                </div>
+                                <!-- End Item Code-->
+
+                                <!-- Start Item Name-->
+                                <div class="col">
+                                    Item Name:
+                                    <input aria-label="Item Name" class="form-control" id="itemName" placeholder=""
+                                           type="text" readonly>
+                                </div>
+                                <!-- End Item Name-->
+                            </div>
+                            <!-- End 1st Row-->
+
+                            <!-- Start 2nd Row-->
+                            <div class="row g-3 mb-4">
+                                <!-- Start Item QTYOnHand-->
+                                <div class="col">
+                                    onHand:
+                                    <input aria-label="QTYOnHand" class="form-control" id="itemonHand" placeholder=""
+                                           type="number" readonly>
+                                </div>
+                                <!-- End Item QTYOnHand-->
+
+                                <!-- Start Item Price-->
+                                <div class="col">
+                                    Price:
+                                    <input aria-label="Price" class="form-control" id="itemPrice" placeholder=""
+                                           type="number" readonly>
+                                </div>
+                                <!-- End Item Price-->
+
+                                <!-- Start Order QTY-->
+                                <div class="col">
+                                    OrderQTY:
+                                    <input aria-label="Order QTY" class="form-control" id="itemorderQty" placeholder=""
+                                           type="number">
+                                </div>
+                            </div>
+                            <!-- End 2nd Row-->
+
+                            <!--Start Add to Cart Button and Clear button-->
+                            <div>
+                                <button class="btn btn-outline-primary" id="btnAddToCart" type="button">Add to Cart
+                                </button>
+
+                                <button class="btn btn-outline-warning" id="btnClear" type="button">Clear</button>
+                            </div>
+                            <!--End Add to Cart Button-->
+                        </form>
+                        <!-- End Item Select Form-->
+                    </div>
+                </div>
+            </section>
+            <!-- End Item Select Form Section-->
+
+
+            <!-- Start Total calculate Form-->
+            <section class="mb-3 col-12 col-md-6 col-lg-4">
+                <nav class="navbar bg-light mb-4">
+                    <div class="container-fluid">
+                        <span class="navbar-brand mb-0  ">Total:</span>
+                    </div>
+                    <div class="container-fluid">
+                        <span id="total">00.0</span>
+                    </div>
+                </nav>
+
+
+                <nav class="navbar bg-light mb-4">
+                    <div class="container-fluid">
+                        <span class="navbar-brand mb-0  ">Sub Total:</span>
+                    </div>
+                    <div class="container-fluid">
+                        <span id="subTotal">00.0</span>
+                    </div>
+                </nav>
+
+
+                <!-- Start cash and discount Row-->
+                <div class="row g-3 mb-4">
+                    <!-- Start Item Code-->
+                    <div class="col">
+                        <input aria-label="Cash" class="form-control" id="txtCash" placeholder="Cash" type="text">
+                    </div>
+                    <!-- End Item Code-->
+
+                    <!-- Start Item Name-->
+                    <div class="col">
+                        <input aria-label="Discount" class="form-control" id="txtDiscount" placeholder="Discount"
+                               type="number">
+                    </div>
+                    <!-- End Item Name-->
+                </div>
+                <!-- End cash and discount Row-->
+
+                <div class="col">
+                    <input aria-label="Balance" class="form-control mb-3" id="txtBalance" placeholder="Balance"
+                           type="number">
+                </div>
+
+                <button class="btn btn-outline-success" id="btnPlaceOrderButton" type="button">Place Order</button>
+
+            </section>
+            <!-- End Total calculate Form-->
+
+        </section>
+        <!--End Invoice details, select item and total forms row-->
+
+
+        <!-- Start Card Table -->
+        <section class="container-fluid">
+            <table class="table table-striped">
+                <thead class="bg-info text-white">
+                <tr class="table-info">
+                    <td>Order ID</td>
+                    <td>Item Code</td>
+                    <td>Item Name</td>
+                    <td>Price</td>
+                    <td>Qty</td>
+                    <td>Total</td>
+                </tr>
+
+                <tbody id="tblCart">
+
+
+                </tbody>
+            </table>
+        </section>
+        <!-- End Card Table -->
     </section>
-    <!--End Invoice details, select item and total forms row-->
+    <!----------------------------------------------------------------------------------------------------------------->
 
 
-    <!-- Start Card Table -->
-    <section class="container-fluid">
-      <table class="table table-striped">
-        <thead class="bg-info text-white">
-        <tr class="table-info">
-          <td>Order ID</td>
-          <td>Item Code</td>
-          <td>Item Name</td>
-          <td>Price</td>
-          <td>Qty</td>
-          <td>Total</td>
-        </tr>
-
-        <tbody id="tblCart">
+    <script src="assets/js/jquery-3.6.1.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script>
 
 
-        </tbody>
-      </table>
-    </section>
-    <!-- End Card Table -->
-  </section>
-  <!----------------------------------------------------------------------------------------------------------------->
+        let baseUrl = "http://localhost:8080/posbackend/";
 
+        //load all items from the database
+        loadAllItems();
+        loadAllCustomers();
+        setDates();
+        searchCustomer();
 
-  <script src="assets/js/jquery-3.6.1.min.js"></script>
-  <script src="assets/js/bootstrap.min.js"></script>
-  <script>
-
-
-    let baseUrl = "http://localhost:8080/posbackend/";
-
-    //load all items from the database
-    loadAllItems();
-    loadAllCustomers();
-    setDates();
-    searchCustomer();
-
-    function loadAllItems() {
-      $("#inputItemID").empty();
-      $.ajax({
-        url: baseUrl + "item",
-        success: function (res) {
-          for (let c of res.data) {
-            let code = c.code;
-            $("#inputItemID").append(`<option value="${code}">${code}</option>`);
-          }
-        },
-        error: function (error) {
-          let message = JSON.parse(error.responseText).message;
-          alert(message);
+        function loadAllItems() {
+            $("#inputItemID").empty();
+            $.ajax({
+                url: baseUrl + "item",
+                success: function (res) {
+                    for (let c of res.data) {
+                        let code = c.code;
+                        $("#inputItemID").append(`<option value="${code}">${code}</option>`);
+                    }
+                },
+                error: function (error) {
+                    let message = JSON.parse(error.responseText).message;
+                    alert(message);
+                }
+            });
         }
-      });
-    }
 
-    function loadAllCustomers() {
-      $("#inputCustomerID").empty();
-      $.ajax({
-        url: baseUrl + "customer",
-        dataType: "json",
-        success: function (resp) {
-          console.log(resp);
-          for (let cus of resp.data) {
-            $("#inputCustomerID").append(`<option value="${cus.id}">${cus.id}</option>`);
-          }
+        function loadAllCustomers() {
+            $("#inputCustomerID").empty();
+            $.ajax({
+                url: baseUrl + "customer",
+                dataType: "json",
+                success: function (resp) {
+                    console.log(resp);
+                    for (let cus of resp.data) {
+                        $("#inputCustomerID").append(`<option value="${cus.id}">${cus.id}</option>`);
+                    }
+                }
+            });
         }
-      });
-    }
 
-  </script>
+        function setDates() {
+            let date = new Date().toJSON().split("T")[0];
+            $("#txtDate").val(date);
+        }
+
+        function searchCustomer(cusID) {
+            let response = "";
+            $.ajax({
+                url: baseUrl + "customer",
+                dataType: "json",
+                async: false,
+                success: function (resp) {
+                    response = resp.data.filter((c) => {
+                        return c.id == cusID;
+                    });
+                }
+            });
+            return response;
+        }
+
+        function searchItem(code) {
+            let response = "";
+            $.ajax({
+                url: baseUrl + "item",
+                dataType: "json",
+                async: false,
+                success: function (resp) {
+                    response = resp.data.filter((i) => {
+                        return i.code == code;
+                    });
+                }
+            });
+            return response;
+        }
+
+
+        $("#inputCustomerID").change(function () {
+            let cusID = $("#inputCustomerID").val();
+            let res = searchCustomer(cusID);
+            if (res.length > 0) {
+                $("#txtCusName").val(res[0].name);
+                $("#txtCusSalary").val(res[0].salary);
+                $("#txtCusAddress").val(res[0].address);
+            }
+
+        });
+
+
+        $("#inputItemID").change(function () {
+          let code = $("#inputItemID").val();
+          // $("#txtItemCode").val(code);
+          let res = searchItem(code);
+          if (res.length > 0) {
+            $("#itemName").val(res[0].description);
+            $("#itemPrice").val(res[0].unitPrice);
+            $("#itemonHand").val(res[0].qtyOnHand);
+          }
+        });
+
+
+        $("#btnAddToCart").click(function () {
+          let OrderID = $("#txtOrderID").val();
+          let code = $("#inputItemID").val();
+          let description = $("#itemName").val();
+          let itemPrice = $("#itemPrice").val();
+          let buyQty = $("#itemorderQty").val();
+          let total = parseFloat(itemPrice) * parseFloat(buyQty);
+          $("#tblCart").append(`<tr><td>${OrderID}</td><td>${code}</td><td>${description}</td><td>${itemPrice}</td><td>${buyQty}</td><td>${total}</td></tr>`);
+        });
+
+
+        $("#btnPlaceOrderButton").click(function () {
+            let orderID = $("#txtOrderID").val();
+            let customerID = $("#txtCusName").val();
+            let orderDate = $("#txtDate").val();
+            let orderD = getItemDetails();
+
+            let ob={
+                oid:orderID,
+                date:orderDate,
+                cusID:customerID,
+                orderDetails:orderD
+            }
+
+            //send request
+            $.ajax({
+                url: baseUrl + "purchase",
+                method:"post",
+                dataType: "json",
+                data:JSON.stringify(ob),
+                contentType:"application/json",
+                success: function (resp) {
+                    alert(resp.message);
+                },
+                error:function (error){
+                    alert(JSON.parse(error.responseText).message);
+                }
+            });
+
+
+        });
+
+        function getItemDetails() {
+            let rows = $("#tblCart").children().length;
+            var array = [];
+            for (let i = 0; i < rows; i++) {
+                let itCode = $("#tblCart").children().eq(i).children(":eq(0)").text();
+                let itQty = $("#tblCart").children().eq(i).children(":eq(2)").text();
+                let itPrice = $("#tblCart").children().eq(i).children(":eq(3)").text();
+                array.push({code: itCode, qty: itQty, price: itPrice});
+            }
+            return array;
+        }
+
+
+    </script>
 </main>
 </body>
 </html>
